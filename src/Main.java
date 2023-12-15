@@ -6,15 +6,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
-        arbol.r =  arbol.add(arbol.r, 8);
-        arbol.r =  arbol.add(arbol.r, 3);
-        arbol.r =  arbol.add(arbol.r, 6);
-        arbol.r =  arbol.add(arbol.r, 1);
-        arbol.r =  arbol.add(arbol.r, 32);
-        arbol.r =  arbol.add(arbol.r, 7);
-        arbol.r =  arbol.add(arbol.r, 32);
-        arbol.r =  arbol.add(arbol.r, 43);
-        arbol.r =  arbol.add(arbol.r, 6);
 
         do {
             System.out.println("----- Menú Arbol -----");
@@ -25,10 +16,10 @@ public class Main {
             System.out.println("5. Modificar nodo");
             System.out.println("6. Borrar árbol");
             System.out.println("7. Salir");
+            System.out.println("8. Mostrar Raiz");
             System.out.print("Seleccione una opción: ");
 
             opcion = scanner.nextInt();
-
             switch (opcion) {
                 case 1:
                     System.out.print("Ingrese el valor del nuevo nodo: ");
@@ -86,6 +77,9 @@ public class Main {
                     break;
                 case 7:
                     System.out.println("Saliendo del programa.");
+                    break;
+                case 8:
+                    System.out.println(arbol.showRaiz());
                     break;
                 default:
                     System.out.println("Opción no válida. Inténtelo de nuevo.");

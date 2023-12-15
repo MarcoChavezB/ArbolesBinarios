@@ -36,6 +36,15 @@ public class Arbol {
     }
 
 
+
+    void borrar(){
+        if(r == null){
+            return;
+        }
+        postBorrar(r);
+        r = null;
+    }
+
     void postBorrar(Nodo n){
         if(n == null){
             return;
@@ -46,13 +55,7 @@ public class Arbol {
         n.der = null;
     }
 
-    void borrar(){
-        if(r == null){
-            return;
-        }
-        postBorrar(r);
-        r = null;
-    }
+
 
 
 
@@ -71,21 +74,6 @@ public class Arbol {
         return n;
     }
 
-    Nodo buscar(Nodo n, int v, int lev){
-        if(r == null){
-            System.out.println("Arbol vacio");
-        }
-        if(n == null){
-            return null;
-        }else if(n.dato == v){
-            System.out.println("Valor encontrado en el nivel " + lev);
-            return n;
-        }else if(v < n.dato){
-            return buscar(n.izq, v, lev + 1);
-        }else{
-            return buscar(n.der, v, lev + 1);
-        }
-    }
 
     void bucarMostrar(int v){
         if(r == null){
@@ -99,6 +87,27 @@ public class Arbol {
         }
     }
 
+    Nodo buscar(Nodo n, int v, int lev){
+        if(r == null){
+            System.out.println("Arbol vacio");
+        }
+        if(n == null){
+            return null;
+
+        }else if(n.dato == v){
+            System.out.println("Valor encontrado en el nivel " + lev);
+            return n;
+        }else if(v < n.dato){
+            return buscar(n.izq, v, lev + 1);
+        }else{
+            return buscar(n.der, v, lev + 1);
+        }
+    }
+
+
+
+
+
     Nodo remove(Nodo subR, int v){
         if(subR == null){
             return subR;
@@ -109,24 +118,26 @@ public class Arbol {
         }else if(v > subR.dato){
             subR.der = remove(subR.der, v);
         }else{
-            if(subR.izq == null){
+            //Nodo con un solo hijo o sin hijos
+            if (subR.izq == null) {
                 return subR.der;
-            }else if(subR.der == null){
+            } else if (subR.der == null) {
                 return subR.izq;
             }
 
-            Nodo siguiente = nodoSiguiente(subR.der);
-            subR.dato = siguiente.dato;
-            subR.der = remove(subR.der, siguiente.dato);
+            Nodo sucesor = nodoSiguiente(subR.izq);
+            subR.dato = sucesor.dato;
+            subR.izq = remove(subR.izq, sucesor.dato);
         }
 
         System.out.println("Se elimino el nodo");
         return subR;
     }
 
+
     Nodo nodoSiguiente(Nodo n){
-        while (n.izq != null){
-            n = n.izq;
+        while (n.der != null){
+            n = n.der;
         }
         return n;
     }
@@ -138,10 +149,16 @@ public class Arbol {
 
         Nodo R = buscar(r, v, 1);
         if(R == null){
-
+            System.out.println("No encontrado");
         }else{
             r = remove(r, v);
             r = add(r, nV);
+            System.out.println("valor modificado");
         }
+    }
+
+
+    String showRaiz(){
+        return r.toString();
     }
 }
